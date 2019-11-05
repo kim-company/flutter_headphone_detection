@@ -1,5 +1,6 @@
 import Flutter
 import UIKit
+import AVFoundation
 
 public class SwiftFlutterHeadphoneDetectionPlugin: NSObject, FlutterPlugin {
     
@@ -12,8 +13,11 @@ public class SwiftFlutterHeadphoneDetectionPlugin: NSObject, FlutterPlugin {
 
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        if call.method == "areHeadphonesConnected " {
-            result(FlutterMethodNotImplemented)
+        if call.method == "areHeadphonesConnected" {
+            let currentAudioRoute = AVAudioSession.sharedInstance().currentRoute
+            let headphoneOutputs = currentAudioRoute.outputs.filter({ $0.portType == AVAudioSessionPortHeadphones })
+            
+            result(headphoneOutputs.count >= 1)
         }
         else {
             result(FlutterMethodNotImplemented)
