@@ -17,11 +17,10 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
+  Future<void> checkHeadphonesStatus() async {
     bool headphonesConnected;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
@@ -45,10 +44,17 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Headphone detection example app'),
         ),
         body: Center(
-          child: Text('Headphones connected: $_headphonesConnected\n'),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                RaisedButton(child: Text('Check headphone status'), onPressed: checkHeadphonesStatus),
+                SizedBox(height: 16),
+                Text('Headphones connected: $_headphonesConnected\n'),
+              ]),
         ),
       ),
     );
