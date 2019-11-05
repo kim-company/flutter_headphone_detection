@@ -16,8 +16,8 @@ class FlutterHeadphoneDetectionPlugin: MethodCallHandler {
   }
 
   override fun onMethodCall(call: MethodCall, result: Result) {
-    if (call.method == "getPlatformVersion") {
-      result.success("Android ${android.os.Build.VERSION.RELEASE}")
+    if (call.method == "areHeadphonesConnected") {
+      result.notImplemented()
     } else {
       result.notImplemented()
     }

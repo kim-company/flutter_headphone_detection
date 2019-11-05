@@ -12,7 +12,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  bool _headphonesConnected = false;
 
   @override
   void initState() {
@@ -22,12 +22,12 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    String platformVersion;
+    bool headphonesConnected;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await FlutterHeadphoneDetection.platformVersion;
+      headphonesConnected = await FlutterHeadphoneDetection.areHeadphonesConnected;
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
+      headphonesConnected = false;
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      _platformVersion = platformVersion;
+      _headphonesConnected = headphonesConnected;
     });
   }
 
@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Text('Headphones connected: $_headphonesConnected\n'),
         ),
       ),
     );
