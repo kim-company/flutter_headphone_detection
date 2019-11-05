@@ -1,6 +1,6 @@
-# flutter_headphone_detection
+# Flutter Headphone Detection
 
-A Flutter plugin that allows to detect if headphones are connected to the device. Supports iOS and Android, but currently only detects wired headphones.
+A Flutter plugin that allows to detect if headphones are currently connected to the device. Supports iOS and Android, but only detects wired headphones at this time.
 
 ## Installation
 
